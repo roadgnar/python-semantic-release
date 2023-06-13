@@ -34,14 +34,23 @@ def get_pattern_with_commit_subject(pattern):
     return escaped_commit_subject.replace(r"\{version\}", pattern)
 
 
+def get_pattern_with_tag_format(pattern):
+    escaped_tag_format = re.escape(config.get("tag_format"))
+    return escaped_tag_format.replace(r"\{version\}", pattern)
+
+
 def get_version_pattern():
     prerelease_pattern = get_prerelease_pattern()
-    return rf"(\d+\.\d+\.\d+({prerelease_pattern})?)"
+    return get_pattern_with_tag_format(
+        rf"(\d+\.\d+\.\d+({prerelease_pattern})?)"
+    )
 
 
 def get_release_version_pattern():
     prerelease_pattern = get_prerelease_pattern()
-    return rf"v?(\d+\.\d+\.\d+(?!.*{prerelease_pattern}))"
+    return get_pattern_with_tag_format(
+        rf"v?(\d+\.\d+\.\d+(?!.*{prerelease_pattern}))"
+    )
 
 
 def get_commit_release_version_pattern():
