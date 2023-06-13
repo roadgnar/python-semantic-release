@@ -25,7 +25,7 @@ except ImportError:
     pass
 
 setup(
-    name="python-semantic-release",
+    name="cyvl-python-semantic-release",
     version=version,
     url="http://github.com/relekang/python-semantic-release",
     author="Rolf Erik Lekang",
